@@ -1,4 +1,4 @@
-package com.coderhouse.pagos;
+package com.coderhouse.model.payment;
 
 public abstract class MedioDePago {
 

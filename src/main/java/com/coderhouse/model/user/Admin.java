@@ -8,7 +8,21 @@ public class Admin extends User {
 
     private List<Venta> ventas;
 
-    public Admin(int idUsr, int cuil, String nombre, String mail, String password) {
+    //Constructor
+
+    public Admin(int idUsr, int cuil, String nombre,
+                 String mail, String password, List<Venta> ventas) {
         super(idUsr, cuil, nombre, mail, password);
+        this.ventas = ventas;
+    }
+
+    //Getters y Setters
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
     }
 }
