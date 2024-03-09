@@ -1,6 +1,8 @@
-package com.coderhouse.model;
+package com.coderhouse.model.product;
 
-public class FiguraDeAccion extends Producto{
+import com.coderhouse.model.product.Producto;
+
+public class FiguraDeAccion extends Producto {
 
     private String fabricante;
     private boolean esArticulado;

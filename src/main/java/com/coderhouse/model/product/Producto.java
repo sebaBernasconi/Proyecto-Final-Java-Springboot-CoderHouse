@@ -1,4 +1,4 @@
-package com.coderhouse.model;
+package com.coderhouse.model.product;
 
 public abstract class Producto {
     private int idProd;

@@ -1,6 +1,6 @@
-package com.coderhouse.model;
+package com.coderhouse.model.transactions;
 
-public class Compra extends Transaccion{
+public class Compra extends Transaccion {
     private Admin vendedor;
 
     //Constructor

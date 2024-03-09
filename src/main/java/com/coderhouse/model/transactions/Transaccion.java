@@ -1,4 +1,4 @@
-package com.coderhouse.model;
+package com.coderhouse.model.transactions;
 
 import java.util.Date;
 

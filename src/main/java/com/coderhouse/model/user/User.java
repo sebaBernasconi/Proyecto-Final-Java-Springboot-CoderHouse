@@ -1,4 +1,4 @@
-package com.coderhouse.model;
+package com.coderhouse.model.user;
 
 public abstract class User {
     private int idUsr;

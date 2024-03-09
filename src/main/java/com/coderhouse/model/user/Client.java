@@ -1,10 +1,11 @@
-package com.coderhouse.model;
+package com.coderhouse.model.user;
 
+import com.coderhouse.model.transactions.Compra;
 import com.coderhouse.pagos.MedioDePago;
 
 import java.util.List;
 
-public class Client extends User{
+public class Client extends User {
 
     //Descomentar cunado cree los objetos
 

@@ -1,8 +1,6 @@
-package com.coderhouse.model;
+package com.coderhouse.model.user;
 
-import java.util.List;
-
-public class Admin extends User{
+public class Admin extends User {
 
     //private List<Venta> ventas;
 
