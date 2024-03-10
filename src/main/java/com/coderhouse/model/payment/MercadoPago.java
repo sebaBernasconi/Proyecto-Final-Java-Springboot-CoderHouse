@@ -3,14 +3,14 @@ package com.coderhouse.model.payment;
 public class MercadoPago extends MedioDePago{
 
     private  String user;
-    private int cvu;
+    private String alias;
     private float saldo;
 
     //Constructor
 
-    public MercadoPago(String user, int cvu, float saldo) {
+    public MercadoPago(String user, String alias, float saldo) {
         this.user = user;
-        this.cvu = cvu;
+        this.alias = alias;
         this.saldo = saldo;
     }
     //Metodos abstractos de la super clase desarrollados
@@ -37,12 +37,12 @@ public class MercadoPago extends MedioDePago{
         this.user = user;
     }
 
-    public int getCvu() {
-        return cvu;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setCvu(int cvu) {
-        this.cvu = cvu;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public float getSaldo() {

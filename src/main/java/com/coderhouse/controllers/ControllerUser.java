@@ -3,6 +3,7 @@ package com.coderhouse.controllers;
 import com.coderhouse.exception.CarritoNotFoundException;
 import com.coderhouse.exception.ProductNotFoundException;
 import com.coderhouse.exception.UserNotFoundException;
+import com.coderhouse.model.payment.MedioDePago;
 import com.coderhouse.model.product.Comic;
 import com.coderhouse.model.product.FiguraDeAccion;
 import com.coderhouse.model.product.Producto;
@@ -69,6 +70,12 @@ public class ControllerUser {
         }else {
             System.out.println("Ya hay un admin registrado con el cuil: " + cuil);
         }
+    }
+
+    public void agregarMedioDePagoAlCliente(int cuil, MedioDePago medioDePago)
+        throws UserNotFoundException{
+        Client c = buscarCliente(cuil);
+        c.setMedioDePago(medioDePago);
     }
 
     public void agregarFiguraDeAccionAlCarrito(int cuil, int codigoDeProducto) throws UserNotFoundException,
