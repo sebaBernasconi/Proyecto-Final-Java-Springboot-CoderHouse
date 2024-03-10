@@ -1,6 +1,8 @@
 package com.coderhouse.controllers;
 
+import com.coderhouse.exception.UserNotFoundException;
 import com.coderhouse.model.product.Comic;
+import com.coderhouse.model.product.FiguraDeAccion;
 import com.coderhouse.model.product.Producto;
 import com.coderhouse.model.transactions.Compra;
 import com.coderhouse.model.transactions.Venta;
@@ -13,8 +15,8 @@ import java.util.List;
 
 public class ControllerUser {
 
-    private int idClient;
-    private int idAdmin;
+    private int idClient = 0;
+    private int idAdmin = 0;
 
     private List<Client> listadoDeClientes;
     private List<Admin> listadoDeAdmins;
@@ -27,7 +29,7 @@ public class ControllerUser {
         this.listadoDeAdmins = new ArrayList<>();
     }
 
-    //Metodos del Controller
+  //getInstancia para que sea singleton
     private static ControllerUser getInstancia(){
         if (instancia == null){
             return  instancia = new ControllerUser();
@@ -36,8 +38,9 @@ public class ControllerUser {
         }
     }
 
+    //Metodos del Controller
     public void registrarCliente(int cuil, String nombre, String mail,
-                                 String password){
+                                 String password) throws UserNotFoundException {
         if (buscarCliente(cuil) == null){
             Client c = new Client(idClient,cuil,nombre,mail,password,
                     null,null,null);
@@ -51,7 +54,7 @@ public class ControllerUser {
     }
 
     public void registrarAdmin(int cuil, String nombre, String mail,
-                               String password){
+                               String password) throws UserNotFoundException {
         if (buscarAdmin(cuil) == null){
             Admin a = new Admin(idAdmin,cuil,nombre,mail,password,null);
             idAdmin ++;
@@ -61,17 +64,17 @@ public class ControllerUser {
         }
     }
 
-    public void agregarAlCarrito(int cuil, int idProducto) {
+    public void agregarFiguraDeAccionAlCarrito(int cuil, int idProducto) throws UserNotFoundException {
 
         Client c = buscarCliente(cuil);
-        /*ControllerProducto controllerProducto = ControllerProducto.getInstancia();
-        Producto p = controllerProducto.buscarProducto(idProducto);
+        ControllerProducto controllerProducto = ControllerProducto.getIntancia();
+       /* FiguraDeAccion f = controllerProducto;
         if(c != null && p != null){
             c.agregarAlCarrito(p);
         }*/
     }
 
-    public void sacarDelCarrito(int cuil, int idProducto){
+    public void sacarDelCarrito(int cuil, int idProducto) throws UserNotFoundException {
         Client c = buscarCliente(cuil);
 
         /*ControllerProducto controllerProducto = ControllerProducto.getInstancia();
@@ -84,64 +87,84 @@ public class ControllerUser {
         }*/
     }
 
-    public void pagarCarrito(int cuil){
+    public void pagarCarrito(int cuil) throws UserNotFoundException {
         Client c = buscarCliente(cuil);
-        c.pagarCarrito();
-    }
-
-    public void verComprasDeUnCliente(int cuil){
-        Client c = buscarCliente(cuil);
-        List<Compra> compras = c.getCompras();
-
-        for (Compra compra :
-                compras) {
-            System.out.println(compra.toString());
+        if (c != null) {
+            c.pagarCarrito();
         }
     }
 
-    public void verVentasDeUnAdmin(int cuil){
+    public void verComprasDeUnCliente(int cuil) throws UserNotFoundException {
+        Client c = buscarCliente(cuil);
+        if (c != null) {
+            List<Compra> compras = c.getCompras();
+
+            for (Compra compra :
+                    compras) {
+                System.out.println(compra.toString());
+            }
+        }
+
+    }
+
+    public void verVentasDeUnAdmin(int cuil) throws UserNotFoundException {
         Admin a = buscarAdmin(cuil);
-        List<Venta> ventas = a.getVentas();
+        if (a != null){
+            List<Venta> ventas = a.getVentas();
 
-        for (Venta v :
-                ventas) {
-            System.out.println(v.toString());
+            for (Venta v :
+                    ventas) {
+                System.out.println(v.toString());
+            }
         }
+
     }
 
     public void mostrarClientes(){
-        for (Client c :
-                listadoDeClientes) {
-            System.out.println(c.toString());
+        if (!listadoDeClientes.isEmpty()){
+            for (Client c :
+                    listadoDeClientes) {
+                System.out.println(c.toString());
+            }
+        }else {
+            System.out.println("No hay ningun cliente registrado todavia");
         }
+
     }
 
     public void mostrarAdmins(){
-        for (Admin a :
-                listadoDeAdmins) {
-            System.out.println(a.toString());
+        if (!listadoDeAdmins.isEmpty()){
+            for (Admin a :
+                    listadoDeAdmins) {
+                System.out.println(a.toString());
+            }
+        }else {
+            System.out.println("No hay ningun admin registrado todavia");
         }
+
     }
 
     //Metodos privados que devuelven objetos que el cliente nunca debe ver
-    private Client buscarCliente(int cuil){
+    private Client buscarCliente(int cuil) throws UserNotFoundException {
         for (Client c :
                 listadoDeClientes) {
             if (cuil == c.getCuil()) {
                 return c;
             }
         }
-        return null;
+        throw new UserNotFoundException("No hay ningun cliente registrado " +
+                "con el cuil: " + cuil);
     }
 
-    private Admin buscarAdmin(int cuil){
+    private Admin buscarAdmin(int cuil) throws UserNotFoundException{
         for (Admin a :
                 listadoDeAdmins) {
             if (cuil == a.getCuil()){
                 return a;
             }
         }
-        return null;
+        throw new UserNotFoundException("No hay ningun admin registrado " +
+                "con el cuil: " + cuil);
     }
 
 }

@@ -2,6 +2,7 @@ package com.coderhouse.model.product;
 
 public abstract class Producto {
     private int idProd;
+    private int codigoDeProducto;
     private String nombre;
     private String descripcion;
     private int stock;
@@ -9,8 +10,11 @@ public abstract class Producto {
 
     //Constructor
 
-    public Producto(int idProd, String nombre, String descripcion, int stock, float precio) {
+
+    public Producto(int idProd, int codigoDeProducto, String nombre,
+                    String descripcion, int stock, float precio) {
         this.idProd = idProd;
+        this.codigoDeProducto = codigoDeProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.stock = stock;
@@ -34,14 +38,7 @@ public abstract class Producto {
         }
     }
 
-    //Metodo abstracto para que implementen las claes que heredan en base
-    //a los atributos que estas posean
-    public void editarProducto() {
-
-    }
-
     //Getters y Setters
-
 
     public int getIdProd() {
         return idProd;
@@ -51,6 +48,13 @@ public abstract class Producto {
         this.idProd = idProd;
     }
 
+    public int getCodigoDeProducto() {
+        return codigoDeProducto;
+    }
+
+    public void setCodigoDeProducto(int codigoDeProducto) {
+        this.codigoDeProducto = codigoDeProducto;
+    }
     public String getNombre() {
         return nombre;
     }

@@ -9,14 +9,14 @@ public class FiguraDeAccion extends Producto {
 
     //Constructor
 
-    public FiguraDeAccion(int idProd, String nombre, String descripcion, int stock,
+    public FiguraDeAccion(int idProd,int codigoDeProducto, String nombre, String descripcion, int stock,
                           float precio, String fabricante, boolean esArticulado) {
-        super(idProd, nombre, descripcion, stock, precio);
+        super(idProd,codigoDeProducto, nombre, descripcion, stock, precio);
         this.fabricante = fabricante;
         this.esArticulado = esArticulado;
     }
 
-    public void editarProducto(String nuevoNombre ,String nuevaDescripcion,
+    public void editarFiguraDeAccion(String nuevoNombre ,String nuevaDescripcion,
                                String nuevoFabricante, boolean nuevoEsArticulado) {
         if (this.getNombre() != nuevoNombre && nuevoNombre != ""){
             this.setNombre(nuevoNombre);
