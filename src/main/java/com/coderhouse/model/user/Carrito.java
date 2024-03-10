@@ -27,6 +27,7 @@ public class Carrito {
 
     //Metodos de la clase
     public void pagarCarrito(){
+
         this.pagado = true;
     }
 

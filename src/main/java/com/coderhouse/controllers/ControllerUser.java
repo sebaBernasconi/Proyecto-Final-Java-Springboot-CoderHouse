@@ -1,5 +1,6 @@
 package com.coderhouse.controllers;
 
+import com.coderhouse.exception.CarritoNotFoundException;
 import com.coderhouse.exception.ProductNotFoundException;
 import com.coderhouse.exception.UserNotFoundException;
 import com.coderhouse.model.product.Comic;
@@ -31,7 +32,7 @@ public class ControllerUser {
     }
 
   //getInstancia para que sea singleton
-    private static ControllerUser getInstancia(){
+    public static ControllerUser getInstancia(){
         if (instancia == null){
             return  instancia = new ControllerUser();
         }else {
@@ -41,11 +42,16 @@ public class ControllerUser {
 
     //Metodos del Controller
     public void registrarCliente(int cuil, String nombre, String mail,
-                                 String password) throws UserNotFoundException {
+                                 String password)
+            throws UserNotFoundException, CarritoNotFoundException {
         if (buscarCliente(cuil) == null){
             Client c = new Client(idClient,cuil,nombre,mail,password,
                     null,null,null);
             idClient ++;
+
+            ControllerCarrito controllerCarrito = ControllerCarrito.getInstancia();
+            c.setCarrito(controllerCarrito.crearCarrito(cuil));
+
             listadoDeClientes.add(c);
         }else {
             System.out.println("Ya hay un cliente registrado con el cuil: " + cuil);
@@ -171,6 +177,12 @@ public class ControllerUser {
             System.out.println("No hay ningun admin registrado todavia");
         }
 
+    }
+
+    //Getter del cliente
+    //Malas practicas?
+    public Client getClient(int cuil)throws UserNotFoundException{
+        return buscarCliente(cuil);
     }
 
     //Metodos privados que devuelven objetos que el cliente nunca debe ver
