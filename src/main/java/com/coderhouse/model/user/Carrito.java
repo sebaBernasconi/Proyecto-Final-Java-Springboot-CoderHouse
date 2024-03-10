@@ -39,10 +39,10 @@ public class Carrito {
         System.out.println("Nuevo total: " + this.total);
     }
 
-    public boolean estaEnElCarrito(int idProducto){
+    public boolean estaEnElCarrito(int codigoDeProducto){
         for (Producto p :
                 productos) {
-            if (p.getIdProd() == idProducto) {
+            if (p.getCodigoDeProducto() == codigoDeProducto) {
                 return true;
             }
         }

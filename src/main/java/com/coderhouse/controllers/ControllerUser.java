@@ -1,5 +1,6 @@
 package com.coderhouse.controllers;
 
+import com.coderhouse.exception.ProductNotFoundException;
 import com.coderhouse.exception.UserNotFoundException;
 import com.coderhouse.model.product.Comic;
 import com.coderhouse.model.product.FiguraDeAccion;
@@ -64,27 +65,55 @@ public class ControllerUser {
         }
     }
 
-    public void agregarFiguraDeAccionAlCarrito(int cuil, int idProducto) throws UserNotFoundException {
+    public void agregarFiguraDeAccionAlCarrito(int cuil, int codigoDeProducto) throws UserNotFoundException,
+            ProductNotFoundException {
 
         Client c = buscarCliente(cuil);
         ControllerProducto controllerProducto = ControllerProducto.getIntancia();
-       /* FiguraDeAccion f = controllerProducto;
-        if(c != null && p != null){
-            c.agregarAlCarrito(p);
-        }*/
+        FiguraDeAccion f = controllerProducto.getFiguraDeAccion(codigoDeProducto);
+        if((c != null && f != null)){
+            c.agregarAlCarrito(f);
+        }
     }
 
-    public void sacarDelCarrito(int cuil, int idProducto) throws UserNotFoundException {
+    public void agregarComicAlCarrito(int cuil, int codigoDeProducto)
+    throws UserNotFoundException, ProductNotFoundException{
         Client c = buscarCliente(cuil);
 
-        /*ControllerProducto controllerProducto = ControllerProducto.getInstancia();
-        Producto p = controllerProducto.buscarProducto(idProducto);
+        ControllerProducto controllerProducto = ControllerProducto.getIntancia();
+        Comic comic = controllerProducto.getComic(codigoDeProducto);
+
+        if (c != null && comic != null){
+            c.agregarAlCarrito(comic);
+        }
+    }
+
+    public void sacarFiguraDeAccionDelCarrito(int cuil, int codigoDeProducto)
+            throws UserNotFoundException, ProductNotFoundException {
+        Client c = buscarCliente(cuil);
+
+        ControllerProducto controllerProducto = ControllerProducto.getIntancia();
+        FiguraDeAccion f = controllerProducto.getFiguraDeAccion(codigoDeProducto);
 
         Carrito carrito = c.getCarrito();
 
-        if((c != null && p != null) && carrito.estaEnElCarrito(idProducto)){
-            c.agregarAlCarrito(p);
-        }*/
+        if((c != null && f != null) && carrito.estaEnElCarrito(codigoDeProducto)){
+            c.sacarDelCarrito(f);
+        }
+    }
+
+    public void sacarComicDelCarrito(int cuil, int codigoDeProducto)
+        throws UserNotFoundException, ProductNotFoundException{
+        Client c = buscarCliente(cuil);
+
+        ControllerProducto controllerProducto = ControllerProducto.getIntancia();
+        Comic comic = controllerProducto.getComic(codigoDeProducto);
+
+        Carrito carrito = c.getCarrito();
+
+        if ((c != null && comic != null) && carrito.estaEnElCarrito(codigoDeProducto)){
+            c.sacarDelCarrito(comic);
+        }
     }
 
     public void pagarCarrito(int cuil) throws UserNotFoundException {

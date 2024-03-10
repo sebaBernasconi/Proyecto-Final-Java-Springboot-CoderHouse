@@ -105,6 +105,16 @@ public class ControllerProducto {
         c.modificarPrecio(nuevoPrecio);
     }
 
+    //Getter de los productos
+    //Mala practica(?
+    public FiguraDeAccion getFiguraDeAccion(int codigoDeProducto) throws ProductNotFoundException {
+        return buscarFiguraDeAccion(codigoDeProducto);
+    }
+
+    public Comic getComic(int codigoDeProducto) throws ProductNotFoundException {
+        return buscarComic(codigoDeProducto);
+    }
+
     //Metodos privados que devuelven objetos que el cliente nunca debe ver
     private FiguraDeAccion buscarFiguraDeAccion(int codigoDeProducto)
             throws ProductNotFoundException {
