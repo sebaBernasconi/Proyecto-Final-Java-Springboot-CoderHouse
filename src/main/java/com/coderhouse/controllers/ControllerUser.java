@@ -1,6 +1,8 @@
 package com.coderhouse.controllers;
 
+import com.coderhouse.model.product.Comic;
 import com.coderhouse.model.product.Producto;
+import com.coderhouse.model.transactions.Compra;
 import com.coderhouse.model.transactions.Venta;
 import com.coderhouse.model.user.Admin;
 import com.coderhouse.model.user.Carrito;
@@ -85,6 +87,26 @@ public class ControllerUser {
     public void pagarCarrito(int cuil){
         Client c = buscarCliente(cuil);
         c.pagarCarrito();
+    }
+
+    public void verComprasDeUnCliente(int cuil){
+        Client c = buscarCliente(cuil);
+        List<Compra> compras = c.getCompras();
+
+        for (Compra compra :
+                compras) {
+            System.out.println(compra.toString());
+        }
+    }
+
+    public void verVentasDeUnAdmin(int cuil){
+        Admin a = buscarAdmin(cuil);
+        List<Venta> ventas = a.getVentas();
+
+        for (Venta v :
+                ventas) {
+            System.out.println(v.toString());
+        }
     }
 
     public void mostrarClientes(){
