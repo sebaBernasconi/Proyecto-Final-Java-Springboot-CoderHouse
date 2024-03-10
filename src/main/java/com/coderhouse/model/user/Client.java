@@ -26,6 +26,8 @@ public class Client extends User {
     public void agregarAlCarrito(Producto p){
         //Mensjae en el metodo de carrito
         this.carrito.agregarAlCarrito(p);
+        p.actualizarStock();
+
     }
 
     public void sacarDelCarrito(Producto p){

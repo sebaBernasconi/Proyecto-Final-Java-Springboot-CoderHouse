@@ -39,6 +39,16 @@ public class Carrito {
         System.out.println("Nuevo total: " + this.total);
     }
 
+    public boolean estaEnElCarrito(int idProducto){
+        for (Producto p :
+                productos) {
+            if (p.getIdProd() == idProducto) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void sacarDelCarrito(Producto p){
         this.productos.remove(p.getIdProd());
         this.total -= p.getPrecio();
